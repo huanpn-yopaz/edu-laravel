@@ -14,20 +14,19 @@ class SearchController extends Controller
      */
     public function search()
     {
-        $id_object=$_GET['id_object'];
-        $id_zoom=$_GET['id_zoom'];
-        if($id_object=='' && $id_zoom==''){
+        $id_object = $_GET['id_object'];
+        $id_zoom = $_GET['id_zoom'];
+        if ($id_object == '' && $id_zoom == '') {
             return back();
+        } elseif ($id_object && $id_zoom) {
+            $post = Post::with('zoom')->with('objects')->where('id_object', $id_object)->where('id_zoom', $id_zoom)->latest('id_post')->get();
+        } elseif ($id_object || $id_zoom) {
+            $post = Post::with('zoom')->with('objects')->where('id_object', $id_object)->Orwhere('id_zoom', $id_zoom)->latest('id_post')->get();
         }
-        elseif($id_object && $id_zoom){
-            $post=Post::with('zoom')->with('objects')->where('id_object',$id_object)->where('id_zoom',$id_zoom)->latest('id_post')->get();
-        }
-        elseif($id_object || $id_zoom){
-            $post=Post::with('zoom')->with('objects')->where('id_object',$id_object)->Orwhere('id_zoom',$id_zoom)->latest('id_post')->get();
-        }
-        $object=Objects::latest('id_object')->get();
-        $zoom=Zoom::latest('id_zoom')->get();
-        return view('page.search')->with(compact('object','zoom','post'));
+        $object = Objects::latest('id_object')->get();
+        $zoom = Zoom::latest('id_zoom')->get();
+
+        return view('page.search')->with(compact('object', 'zoom', 'post'));
     }
 
     /**

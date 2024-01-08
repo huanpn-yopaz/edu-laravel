@@ -15,9 +15,11 @@ class ObjectsController extends Controller
      */
     public function index()
     {
-        $object=Objects::latest('id_object')->get();
+        $object = Objects::latest('id_object')->get();
+
         return view('admin.object.index')->with(compact('object'));
     }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -31,19 +33,23 @@ class ObjectsController extends Controller
      */
     public function store(Request $request)
     {
-        $object=$request->all();
+        $object = $request->all();
         Objects::create($object);
         toastr()->success('Thêm môn học thành công');
+
         return back();
     }
+
     public function export_object()
     {
-        return Excel::download(new ObjectExport , 'object.xlsx');
+        return Excel::download(new ObjectExport, 'object.xlsx');
     }
+
     public function import_object(Request $request)
     {
         $path = $request->file('object_xlsx')->getRealPath();
         Excel::import(new ObjectImport, $path);
+
         return back();
     }
 
@@ -60,7 +66,8 @@ class ObjectsController extends Controller
      */
     public function edit(string $id)
     {
-        $object=Objects::find($id);
+        $object = Objects::find($id);
+
         return view('admin.object.edit')->with(compact('object'));
     }
 
@@ -69,8 +76,9 @@ class ObjectsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $object=Objects::find($id);
+        $object = Objects::find($id);
         $object->update($request->all());
+
         return redirect('admin/object');
     }
 
@@ -79,9 +87,10 @@ class ObjectsController extends Controller
      */
     public function destroy(string $id)
     {
-        $object=Objects::find($id);
+        $object = Objects::find($id);
         $object->delete();
         toastr()->success('Xóa môn học thành công');
+
         return back();
     }
 }

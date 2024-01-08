@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\Zoom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+
 class HomeController extends Controller
 {
     /**
@@ -14,24 +15,26 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $object=Objects::latest('id_object')->get();
-        $zoom=Zoom::latest('id_zoom')->get();
-        return view('page.home')->with(compact('object','zoom'));
+        $object = Objects::latest('id_object')->get();
+        $zoom = Zoom::latest('id_zoom')->get();
+
+        return view('page.home')->with(compact('object', 'zoom'));
     }
+
     public function load_more(Request $request)
     {
-        $data=$request->all();
+        $data = $request->all();
         if ($data['id'] > 0) {
-            $post=Post::select('id_post','name_post','img_post','img_teacher','name_teacher','date_post','id_zoom','id_object')->with('zoom')->with('objects')->where('id_post','<',$data['id'])->latest('id_post')->take(3)->get();
-        }else{
-            $post=Post::select('id_post','name_post','img_post','img_teacher','name_teacher','date_post','id_zoom','id_object')->with('zoom')->with('objects')->with('zoom')->with('objects')->latest('id_post')->take(3)->get();
+            $post = Post::select('id_post', 'name_post', 'img_post', 'img_teacher', 'name_teacher', 'date_post', 'id_zoom', 'id_object')->with('zoom')->with('objects')->where('id_post', '<', $data['id'])->latest('id_post')->take(3)->get();
+        } else {
+            $post = Post::select('id_post', 'name_post', 'img_post', 'img_teacher', 'name_teacher', 'date_post', 'id_zoom', 'id_object')->with('zoom')->with('objects')->with('zoom')->with('objects')->latest('id_post')->take(3)->get();
         }
-        $output='';
-        if (!$post->isEmpty()) {
-           foreach ($post as $key => $value) {
-            $last_id=$value->id_post;
-            $output.='<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-            <a href="'.Route('show.post',[$value->id_post, Str::slug($value->name_post)]).'" class="text-decoration-none">
+        $output = '';
+        if (! $post->isEmpty()) {
+            foreach ($post as $key => $value) {
+                $last_id = $value->id_post;
+                $output .= '<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+            <a href="'.Route('show.post', [$value->id_post, Str::slug($value->name_post)]).'" class="text-decoration-none">
                 <div class="classes-item text-black">
                     <div class="bg-light rounded-circle w-75 mx-auto p-3">
                         <img class="img-fluid rounded-circle" src="'.asset('image/'.$value->img_post).'" alt="">
@@ -72,19 +75,20 @@ class HomeController extends Controller
                 </div>
             </a>
         </div>';
-           }
-           $output.='<div style="display:flex;justify-content:center" data-wow-delay="0.5s">
+            }
+            $output .= '<div style="display:flex;justify-content:center" data-wow-delay="0.5s">
         
            <div>
                <button id="load_btn" type="button" class="btn btn-primary" data-id="'.$last_id.'">Xem thêm</button>
            </div>
        </div>';
         } else {
-           $output.='';
+            $output .= '';
         }
-        
+
         echo $output;
     }
+
     /**
      * Show the form for creating a new resource.
      */

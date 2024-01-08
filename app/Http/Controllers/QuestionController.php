@@ -13,9 +13,10 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $object=Objects::latest('id_object')->get();
-        $zoom=Zoom::latest('id_zoom')->get();
-        return view('page.question')->with(compact('object','zoom'));
+        $object = Objects::latest('id_object')->get();
+        $zoom = Zoom::latest('id_zoom')->get();
+
+        return view('page.question')->with(compact('object', 'zoom'));
     }
 
     /**

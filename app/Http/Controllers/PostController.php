@@ -6,6 +6,7 @@ use App\Models\Objects;
 use App\Models\Post;
 use App\Models\Zoom;
 use Illuminate\Http\Request;
+
 class PostController extends Controller
 {
     /**
@@ -13,7 +14,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $post=Post::latest('id_post')->get();
+        $post = Post::latest('id_post')->get();
+
         return view('admin.post.index')->with(compact('post'));
     }
 
@@ -22,9 +24,10 @@ class PostController extends Controller
      */
     public function create()
     {
-        $object=Objects::latest('id_object')->get();
-        $zoom=Zoom::latest('id_zoom')->get();
-        return view('admin.post.create')->with(compact('object','zoom'));
+        $object = Objects::latest('id_object')->get();
+        $zoom = Zoom::latest('id_zoom')->get();
+
+        return view('admin.post.create')->with(compact('object', 'zoom'));
     }
 
     /**
@@ -33,22 +36,23 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $post = $request->all();
-       
+
         if ($save_img_post = $request->file('img_post')) {
             $destinationPath = 'image';
-            $img_post = date('YmdHis') . "." . $save_img_post->getClientOriginalExtension();
+            $img_post = date('YmdHis').'.'.$save_img_post->getClientOriginalExtension();
             $save_img_post->move($destinationPath, $img_post);
             $post['img_post'] = $img_post;
         }
         if ($save_img_teacher = $request->file('img_teacher')) {
             $destinationPath = 'image';
-            $img_teacher = date('YdmHis') . "." . $save_img_teacher->getClientOriginalExtension();
+            $img_teacher = date('YdmHis').'.'.$save_img_teacher->getClientOriginalExtension();
             $save_img_teacher->move($destinationPath, $img_teacher);
             $post['img_teacher'] = $img_teacher;
         }
 
         Post::create($post);
         toastr()->success('Thêm bài học thành công');
+
         return back();
     }
 
@@ -65,10 +69,11 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        $object=Objects::latest('id_object')->get();
-        $zoom=Zoom::latest('id_zoom')->get();
-        $post=Post::find($id);
-        return view('admin.post.edit')->with(compact('object','zoom','post'));
+        $object = Objects::latest('id_object')->get();
+        $zoom = Zoom::latest('id_zoom')->get();
+        $post = Post::find($id);
+
+        return view('admin.post.edit')->with(compact('object', 'zoom', 'post'));
     }
 
     public function update(Request $request, string $id)
@@ -77,21 +82,22 @@ class PostController extends Controller
         $input = $request->all();
         if ($save_img_post = $request->file('img_post')) {
             $destinationPath = 'image';
-            $img_post = date('YmdHis') . "." . $save_img_post->getClientOriginalExtension();
+            $img_post = date('YmdHis').'.'.$save_img_post->getClientOriginalExtension();
             $save_img_post->move($destinationPath, $img_post);
             $input['img_post'] = $img_post;
-            unlink('image/' . $post->img_post);
+            unlink('image/'.$post->img_post);
         }
         if ($save_img_teacher = $request->file('img_teacher')) {
             $destinationPath = 'image';
-            $img_teacher = date('YdmHis') . "." . $save_img_teacher->getClientOriginalExtension();
+            $img_teacher = date('YdmHis').'.'.$save_img_teacher->getClientOriginalExtension();
             $save_img_teacher->move($destinationPath, $img_teacher);
             $input['img_teacher'] = $img_teacher;
-            unlink('image/' . $post->img_teacher);
+            unlink('image/'.$post->img_teacher);
         }
 
         $post->update($input);
         toastr()->success('Cập nhật bài học thành công');
+
         return back();
     }
 
@@ -100,13 +106,14 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        $post=Post::find($id);
-        if($post->img_post && $post->img_teacher){
+        $post = Post::find($id);
+        if ($post->img_post && $post->img_teacher) {
             unlink('image/'.$post->img_post);
             unlink('image/'.$post->img_teacher);
         }
         $post->delete();
         toastr()->success('Xóa bài học thành công');
+
         return back();
     }
 }

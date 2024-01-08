@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Support\Facades\Auth;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserMiddleware
@@ -20,6 +20,7 @@ class UserMiddleware
             return $next($request);
         } else {
             toastr()->warning('Đăng nhập để làm bài tập');
+
             return redirect('dang-nhap');
         }
     }

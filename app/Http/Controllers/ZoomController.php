@@ -1,8 +1,11 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use App\Models\Zoom;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+
 class ZoomController extends Controller
 {
     /**
@@ -10,9 +13,11 @@ class ZoomController extends Controller
      */
     public function index()
     {
-        $zoom=Zoom::latest('id_zoom')->get();
+        $zoom = Zoom::latest('id_zoom')->get();
+
         return view('admin.zoom.index')->with(compact('zoom'));
     }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -26,10 +31,11 @@ class ZoomController extends Controller
      */
     public function store(Request $request)
     {
-        $zoom=$request->all();
-        $zoom['created_at']=Carbon::now('Asia/Ho_Chi_Minh');
+        $zoom = $request->all();
+        $zoom['created_at'] = Carbon::now('Asia/Ho_Chi_Minh');
         Zoom::create($zoom);
         toastr()->success('Thêm lớp thành công');
+
         return back();
     }
 
@@ -46,7 +52,8 @@ class ZoomController extends Controller
      */
     public function edit(string $id)
     {
-        $zoom=Zoom::find($id);
+        $zoom = Zoom::find($id);
+
         return view('admin.zoom.edit')->with(compact('zoom'));
     }
 
@@ -55,9 +62,10 @@ class ZoomController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $zoom=Zoom::find($id);
-        $zoom['updated_at']=Carbon::now('Asia/Ho_Chi_Minh');
+        $zoom = Zoom::find($id);
+        $zoom['updated_at'] = Carbon::now('Asia/Ho_Chi_Minh');
         $zoom->update($request->all());
+
         return redirect('admin/zoom');
     }
 
@@ -66,9 +74,10 @@ class ZoomController extends Controller
      */
     public function destroy(string $id)
     {
-        $zoom=Zoom::find($id);
+        $zoom = Zoom::find($id);
         $zoom->delete();
         toastr()->success('Xóa lớp thành công');
+
         return back();
     }
 }

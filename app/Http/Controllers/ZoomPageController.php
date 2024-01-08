@@ -14,7 +14,7 @@ class ZoomPageController extends Controller
      */
     public function index()
     {
-       
+
     }
 
     /**
@@ -38,10 +38,11 @@ class ZoomPageController extends Controller
      */
     public function show(string $id)
     {
-        $object=Objects::latest('id_object')->get();
-        $zoom=Zoom::latest('id_zoom')->get();
-        $post=Post::select('id_post','name_post','img_post','img_teacher','name_teacher','date_post','id_zoom','id_object')->with('zoom')->with('objects')->with('zoom')->with('objects')->latest('id_post')->where('id_zoom',$id)->get();
-        return view('page.zoom')->with(compact('object','zoom','post'));
+        $object = Objects::latest('id_object')->get();
+        $zoom = Zoom::latest('id_zoom')->get();
+        $post = Post::select('id_post', 'name_post', 'img_post', 'img_teacher', 'name_teacher', 'date_post', 'id_zoom', 'id_object')->with('zoom')->with('objects')->with('zoom')->with('objects')->latest('id_post')->where('id_zoom', $id)->get();
+
+        return view('page.zoom')->with(compact('object', 'zoom', 'post'));
     }
 
     /**

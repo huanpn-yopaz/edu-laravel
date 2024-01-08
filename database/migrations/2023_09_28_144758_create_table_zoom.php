@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('zoom', function (Blueprint $table) {
             $table->id('id_zoom');
-           $table->string('name_zoom',20);
-           $table->timestamps();
+            $table->string('name_zoom', 20);
+            $table->timestamps();
         });
     }
 

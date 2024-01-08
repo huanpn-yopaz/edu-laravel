@@ -14,11 +14,12 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $post=Post::count();
-        $zoom=Zoom::count();
-        $user=User::latest('id')->get();
-        $count_user=User::count();
-        return view('admin.dashboard')->with(compact('post','zoom','user','count_user'));
+        $post = Post::count();
+        $zoom = Zoom::count();
+        $user = User::latest('id')->get();
+        $count_user = User::count();
+
+        return view('admin.dashboard')->with(compact('post', 'zoom', 'user', 'count_user'));
     }
 
     /**
@@ -50,7 +51,7 @@ class DashboardController extends Controller
      */
     public function edit(string $id)
     {
-        
+
     }
 
     /**

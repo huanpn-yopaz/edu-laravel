@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
-use Illuminate\Http\Request;
-use Exception;
-use App\Models\User;
+
 class GoogleController extends Controller
 {
-    
     public function redirectToGoogle()
     {
         return Socialite::driver('google')->redirect();

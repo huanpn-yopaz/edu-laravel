@@ -38,10 +38,11 @@ class ObjectPageController extends Controller
      */
     public function show(string $id)
     {
-        $object=Objects::latest('id_object')->get();
-        $zoom=Zoom::latest('id_zoom')->get();
-        $post=Post::select('id_post','name_post','img_post','img_teacher','name_teacher','date_post','id_zoom','id_object')->with('zoom')->with('objects')->with('zoom')->with('objects')->where('id_object',$id)->latest('id_post')->get();
-        return view('page.object')->with(compact('object','zoom','post'));
+        $object = Objects::latest('id_object')->get();
+        $zoom = Zoom::latest('id_zoom')->get();
+        $post = Post::select('id_post', 'name_post', 'img_post', 'img_teacher', 'name_teacher', 'date_post', 'id_zoom', 'id_object')->with('zoom')->with('objects')->with('zoom')->with('objects')->where('id_object', $id)->latest('id_post')->get();
+
+        return view('page.object')->with(compact('object', 'zoom', 'post'));
     }
 
     /**

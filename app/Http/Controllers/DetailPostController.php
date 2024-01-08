@@ -38,13 +38,12 @@ class DetailPostController extends Controller
      */
     public function show(string $id)
     {
-        $object=Objects::latest('id_object')->get();
-        $zoom=Zoom::latest('id_zoom')->get();
-        $post=Post::with('zoom')->with('objects')->find($id);
-        if($post){
-            return view('page.detailpost')->with(compact('object','zoom','post'));
-        }
-        else{
+        $object = Objects::latest('id_object')->get();
+        $zoom = Zoom::latest('id_zoom')->get();
+        $post = Post::with('zoom')->with('objects')->find($id);
+        if ($post) {
+            return view('page.detailpost')->with(compact('object', 'zoom', 'post'));
+        } else {
             abort(404);
         }
     }

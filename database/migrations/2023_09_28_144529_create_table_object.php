@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('object', function (Blueprint $table) {
             $table->id('id_object');
-           $table->string('name_object',20);
-           $table->timestamps();
+            $table->string('name_object', 20);
+            $table->timestamps();
         });
     }
 

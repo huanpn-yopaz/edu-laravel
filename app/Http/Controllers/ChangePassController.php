@@ -14,9 +14,10 @@ class ChangePassController extends Controller
      */
     public function index()
     {
-        $object=Objects::latest('id_object')->get();
-        $zoom=Zoom::latest('id_zoom')->get();
-        return view('page.changepass')->with(compact('object','zoom'));
+        $object = Objects::latest('id_object')->get();
+        $zoom = Zoom::latest('id_zoom')->get();
+
+        return view('page.changepass')->with(compact('object', 'zoom'));
     }
 
     /**
@@ -62,9 +63,10 @@ class ChangePassController extends Controller
             'password.required' => 'Không được bỏ trống',
             'password.min' => 'Lớn hơn 8 kí tự',
         ]);
-        $user=User::find($id);
+        $user = User::find($id);
         $user->update($request->all());
         toastr()->success('Đổi mật khẩu thành công');
+
         return redirect('/');
     }
 
