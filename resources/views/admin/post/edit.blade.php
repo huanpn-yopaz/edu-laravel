@@ -25,12 +25,12 @@
                         <input type="text" class="input_form" placeholder="Tên bài học" name="name_post"
                             value="{{ $post->name_post }}">
                         <div><input onchange="loadFile_post(event)" type="file" id="" name="img_post"></div>
-                        <img id="img_post" src="{{ asset('image/' . $post->img_post) }}" alt="" width="20%">
+                        <img id="img_post" src="{{  $post->img_post }}" alt="" width="20%">
                         <textarea name="video_post" id="" cols="30" rows="10">{{ $post->video_post }}</textarea>
                         <input type="text" class="input_form" placeholder="Tên giáo viên" name="name_teacher"
                             value="{{ $post->name_teacher }}">
                         <div><input onchange="loadFile_teacher(event)" type="file" name="img_teacher"></div>
-                        <img id="img_teacher" src="{{ asset('image/' . $post->img_teacher) }}" alt="" width="20%">
+                        <img id="img_teacher" src="{{  $post->img_teacher }}" alt="" width="20%">
                         <input type="date" class="input_form" name="date_post" value="{{ $post->date_post }}">
                         <select name="id_object" id="" style="width:100%;padding:10px">
                             <option value="">Môn học</option>

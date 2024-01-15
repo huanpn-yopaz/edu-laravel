@@ -60,7 +60,7 @@
                             class="text-decoration-none">
                             <div class="classes-item text-black">
                                 <div class="bg-light rounded-circle w-75 mx-auto p-3">
-                                    <img class="img-fluid rounded-circle" src="{{ asset('image/' . $value->img_post) }}"
+                                    <img class="img-fluid rounded-circle" src="{{  $value->img_post }}"
                                         alt="">
                                 </div>
                                 <div class="bg-light rounded p-4">
@@ -68,7 +68,7 @@
                                     <div class="d-flex align-items-center justify-content-between mb-4">
                                         <div class="d-flex align-items-center">
                                             <img class="rounded-circle flex-shrink-0"
-                                                src="{{ asset('image/' . $value->img_teacher) }}" alt=""
+                                                src="{{  $value->img_teacher }}" alt=""
                                                 style="width: 45px; height: 45px;">
                                             <div class="ms-3">
                                                 <h6 class="text-primary mb-1">{{ $value->name_teacher }}</h6>

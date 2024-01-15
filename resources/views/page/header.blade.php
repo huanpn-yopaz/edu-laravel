@@ -9,7 +9,15 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav mx-auto">
             <a href="{{url('/')}}" class="nav-item nav-link {{Request::segment(1)== '' ? 'active' : ''}}">Trang chủ</a>
-            <a href="{{url('gioi-thieu')}}" class="nav-item nav-link {{Request::segment(1)== 'gioi-thieu' ? 'active' : ''}}">Giới thiệu</a>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle {{Request::segment(1)== 'lien-he' ||  Request::segment(1)== 'gioi-thieu'? 'active' : ''}}" data-bs-toggle="dropdown">Về chúng tôi</a>
+                <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">                
+                <a href="https://huanbackend.000webhostapp.com" target="blank" class="dropdown-item">Việc làm</a>
+                <a href="{{url('gioi-thieu')}}" class="dropdown-item {{Request::segment(1)== 'gioi-thieu' ? 'active-list' : ''}}">Giới thiệu</a>
+                <a href="{{url('lien-he')}}" class="dropdown-item {{Request::segment(1)== 'lien-he' ? 'active-list' : ''}}">Liên hệ</a>
+                
+                </div>
+            </div>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle {{Request::segment(1)== 'mon-hoc' ? 'active' : ''}}" data-bs-toggle="dropdown">Môn học</a>
                 <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">
@@ -28,10 +36,7 @@
                    
                 </div>
             </div>
-
-            <a href="{{url('lien-he')}}" class="nav-item nav-link {{Request::segment(1)== 'lien-he' ? 'active' : ''}}">Liên hệ</a>
-            
-            
+            <a href="{{url('tin-tuc')}}" class="{{Request::segment(1)== 'tin-tuc' || Request::segment(1)== 'tim-kiem-tin-tuc'? 'active' : ''}} nav-item nav-link">Tin tức</a>
             @if (Auth::check())
             <div class="d-lg-none nav-item d-flex">
                 <div>Xin chào {{Auth::user()->name}}</div>

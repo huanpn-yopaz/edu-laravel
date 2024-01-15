@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Zoom;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ZoomController extends Controller
 {

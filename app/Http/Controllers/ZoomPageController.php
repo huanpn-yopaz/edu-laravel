@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Objects;
 use App\Models\Post;
 use App\Models\Zoom;
 use Illuminate\Http\Request;
@@ -38,11 +37,10 @@ class ZoomPageController extends Controller
      */
     public function show(string $id)
     {
-        $object = Objects::latest('id_object')->get();
-        $zoom = Zoom::latest('id_zoom')->get();
         $post = Post::select('id_post', 'name_post', 'img_post', 'img_teacher', 'name_teacher', 'date_post', 'id_zoom', 'id_object')->with('zoom')->with('objects')->with('zoom')->with('objects')->latest('id_post')->where('id_zoom', $id)->get();
+        $name_zoom = Zoom::find($id)->name_zoom;
 
-        return view('page.zoom')->with(compact('object', 'zoom', 'post'));
+        return view('page.zoom')->with(compact('post', 'name_zoom'));
     }
 
     /**

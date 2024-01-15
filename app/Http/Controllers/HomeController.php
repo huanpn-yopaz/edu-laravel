@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Objects;
 use App\Models\Post;
-use App\Models\Zoom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -15,19 +13,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $object = Objects::latest('id_object')->get();
-        $zoom = Zoom::latest('id_zoom')->get();
-
-        return view('page.home')->with(compact('object', 'zoom'));
+        return view('page.home');
     }
 
     public function load_more(Request $request)
     {
         $data = $request->all();
         if ($data['id'] > 0) {
-            $post = Post::select('id_post', 'name_post', 'img_post', 'img_teacher', 'name_teacher', 'date_post', 'id_zoom', 'id_object')->with('zoom')->with('objects')->where('id_post', '<', $data['id'])->latest('id_post')->take(3)->get();
+            $post = Post::select('id_post', 'name_post', 'img_post', 'img_teacher', 'name_teacher', 'date_post', 'id_zoom', 'id_object')->with('zoom')->with('objects')->where('id_post', '<', $data['id'])->latest('id_post')->take(6)->get();
         } else {
-            $post = Post::select('id_post', 'name_post', 'img_post', 'img_teacher', 'name_teacher', 'date_post', 'id_zoom', 'id_object')->with('zoom')->with('objects')->with('zoom')->with('objects')->latest('id_post')->take(3)->get();
+            $post = Post::select('id_post', 'name_post', 'img_post', 'img_teacher', 'name_teacher', 'date_post', 'id_zoom', 'id_object')->with('zoom')->with('objects')->with('zoom')->with('objects')->latest('id_post')->take(6)->get();
         }
         $output = '';
         if (! $post->isEmpty()) {
@@ -37,13 +32,13 @@ class HomeController extends Controller
             <a href="'.Route('show.post', [$value->id_post, Str::slug($value->name_post)]).'" class="text-decoration-none">
                 <div class="classes-item text-black">
                     <div class="bg-light rounded-circle w-75 mx-auto p-3">
-                        <img class="img-fluid rounded-circle" src="'.asset('image/'.$value->img_post).'" alt="">
+                        <img class="img-fluid rounded-circle" src="'.$value->img_post.'" alt="">
                     </div>
                     <div class="bg-light rounded p-4">
                         <p class="d-block text-center h3 mb-4">'.$value->name_post.'</p>
                         <div class="d-flex align-items-center justify-content-between mb-4">
                             <div class="d-flex align-items-center">
-                                <img class="rounded-circle flex-shrink-0" src="'.asset('image/'.$value->img_teacher).'" alt=""
+                                <img class="rounded-circle flex-shrink-0" src="'.$value->img_teacher.'" alt=""
                                     style="width: 45px; height: 45px;">
                                 <div class="ms-3">
                                     <h6 class="text-primary mb-1">'.$value->name_teacher.'</h6>

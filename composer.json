@@ -12,6 +12,7 @@
         "laravel/socialite": "^5.9",
         "laravel/tinker": "^2.8",
         "maatwebsite/excel": "^3.1",
+        "yoelpc4/laravel-cloudinary": "^4.0",
         "yoeunes/toastr": "^2.3"
     },
     "require-dev": {

@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Objects;
 use App\Models\Post;
-use App\Models\Zoom;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -23,10 +21,8 @@ class SearchController extends Controller
         } elseif ($id_object || $id_zoom) {
             $post = Post::with('zoom')->with('objects')->where('id_object', $id_object)->Orwhere('id_zoom', $id_zoom)->latest('id_post')->get();
         }
-        $object = Objects::latest('id_object')->get();
-        $zoom = Zoom::latest('id_zoom')->get();
 
-        return view('page.search')->with(compact('object', 'zoom', 'post'));
+        return view('page.search')->with(compact('post'));
     }
 
     /**

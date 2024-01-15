@@ -64,6 +64,18 @@
                     <span class="text">Tạo bài giảng</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ Route('news.index') }}">
+                    <i class='bx bxs-message-dots'></i>
+                    <span class="text">Bài viet</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ Route('news.create') }}">
+                    <i class='bx bxs-group'></i>
+                    <span class="text">Tạo bài viet</span>
+                </a>
+            </li>
         </ul>
         <ul class="side-menu">
 
@@ -106,14 +118,14 @@
         @yield('content')
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.js"></script>
+<script>
+    $(document).ready(function() {
+  $('#summernote').summernote();
+});
+</script>
 
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
-
-
-    <script>
-        new DataTable('#myTable');
-    </script>
     <script>
         $(document).ready(function() {
             $('[title="Hosted on free web hosting 000webhost.com. Host your own website for FREE."]').hide();
@@ -124,11 +136,6 @@
         CKEDITOR.replace('video_post');
     </script>
     <script src="{{ asset('js/admin.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            $('#user').DataTable();
-        });
-    </script>
     <script>
         var loadFile_post = function(event) {
             var reader = new FileReader();

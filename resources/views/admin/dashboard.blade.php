@@ -27,7 +27,7 @@
             <li>
                 <i class='bx bxs-calendar-check'></i>
                 <span class="text">
-                    <h3>{{$zoom}}</h3>
+                    {{-- <h3>{{$zoom}}</h3> --}}
                     <p>Zoom</p>
                 </span>
             </li>

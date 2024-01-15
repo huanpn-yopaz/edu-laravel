@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Objects;
 use App\Models\Post;
 use App\Models\Zoom;
+use App\Traits\ImageTrait;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    use ImageTrait;
+
     /**
      * Display a listing of the resource.
      */
@@ -37,17 +40,13 @@ class PostController extends Controller
     {
         $post = $request->all();
 
-        if ($save_img_post = $request->file('img_post')) {
-            $destinationPath = 'image';
-            $img_post = date('YmdHis').'.'.$save_img_post->getClientOriginalExtension();
-            $save_img_post->move($destinationPath, $img_post);
-            $post['img_post'] = $img_post;
+        if ($request->file('img_post')) {
+            $img_post = $this->uploads($request->file('img_post'));
+            $data['img_post'] = $img_post['filePath'];
         }
-        if ($save_img_teacher = $request->file('img_teacher')) {
-            $destinationPath = 'image';
-            $img_teacher = date('YdmHis').'.'.$save_img_teacher->getClientOriginalExtension();
-            $save_img_teacher->move($destinationPath, $img_teacher);
-            $post['img_teacher'] = $img_teacher;
+        if ($request->file('img_teacher')) {
+            $img_teacher = $this->uploads($request->file('img_teacher'));
+            $data['img_teacher'] = $img_teacher['filePath'];
         }
 
         Post::create($post);
@@ -80,19 +79,13 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         $input = $request->all();
-        if ($save_img_post = $request->file('img_post')) {
-            $destinationPath = 'image';
-            $img_post = date('YmdHis').'.'.$save_img_post->getClientOriginalExtension();
-            $save_img_post->move($destinationPath, $img_post);
-            $input['img_post'] = $img_post;
-            unlink('image/'.$post->img_post);
+        if ($file = $request->file('img_post')) {
+            $filedata = $this->uploads($file);
+            $data['img_post'] = $filedata['filePath'];
         }
-        if ($save_img_teacher = $request->file('img_teacher')) {
-            $destinationPath = 'image';
-            $img_teacher = date('YdmHis').'.'.$save_img_teacher->getClientOriginalExtension();
-            $save_img_teacher->move($destinationPath, $img_teacher);
-            $input['img_teacher'] = $img_teacher;
-            unlink('image/'.$post->img_teacher);
+        if ($file_teacher = $request->file('img_teacher')) {
+            $filedata = $this->uploads($file_teacher);
+            $data['img_teacher'] = $filedata['filePath'];
         }
 
         $post->update($input);
@@ -107,10 +100,6 @@ class PostController extends Controller
     public function destroy(string $id)
     {
         $post = Post::find($id);
-        if ($post->img_post && $post->img_teacher) {
-            unlink('image/'.$post->img_post);
-            unlink('image/'.$post->img_teacher);
-        }
         $post->delete();
         toastr()->success('Xóa bài học thành công');
 

@@ -2,18 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Objects;
-use App\Models\Post;
+use App\Repositories\BaseRepositoryInterface;
 use Illuminate\Http\Request;
 
-class ObjectPageController extends Controller
+class NewController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    protected $newRepository;
+
+    public function __construct(BaseRepositoryInterface $newRepository)
+    {
+        $this->newRepository = $newRepository;
+    }
+
     public function index()
     {
-        //
+        $news = $this->newRepository->all();
+
+        return view('admin.news.index', compact('news'));
     }
 
     /**
@@ -21,7 +26,7 @@ class ObjectPageController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.news.create');
     }
 
     /**
@@ -29,7 +34,9 @@ class ObjectPageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->newRepository->create($request);
+
+        return redirect()->route('news.index');
     }
 
     /**
@@ -37,10 +44,7 @@ class ObjectPageController extends Controller
      */
     public function show(string $id)
     {
-        $post = Post::select('id_post', 'name_post', 'img_post', 'img_teacher', 'name_teacher', 'date_post', 'id_zoom', 'id_object')->with('zoom')->with('objects')->with('zoom')->with('objects')->where('id_object', $id)->latest('id_post')->get();
-        $name_object = Objects::find($id)->name_object;
-
-        return view('page.object')->with(compact('post', 'name_object'));
+        //
     }
 
     /**
@@ -48,7 +52,9 @@ class ObjectPageController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $news = $this->newRepository->find($id);
+
+        return view('admin.news.edit', compact('news'));
     }
 
     /**
@@ -56,7 +62,10 @@ class ObjectPageController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $this->newRepository->update($request, $id);
+
+        return back();
     }
 
     /**
@@ -64,6 +73,8 @@ class ObjectPageController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->newRepository->delete($id);
+
+        return back();
     }
 }

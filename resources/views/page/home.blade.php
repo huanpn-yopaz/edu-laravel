@@ -6,7 +6,7 @@
     <div class="container-fluid p-0 mb-5">
         <div class="owl-carousel header-carousel position-relative">
             <div class="owl-carousel-item position-relative">
-                <img class="img-fluid" src="img/carousel-1.jpg" alt="">
+                <img class="img-fluid" src="https://res.cloudinary.com/dzrc27udp/image/upload/v1705322431/image/carousel-1_nvvhql.jpg" alt="">
                 <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
                     style="background: rgba(0, 0, 0, .2);">
                     <div class="container">
@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="owl-carousel-item position-relative">
-                <img class="img-fluid" src="img/carousel-2.jpg" alt="">
+                <img class="img-fluid" src="https://res.cloudinary.com/dzrc27udp/image/upload/v1705322430/image/carousel-2_hgpfzi.jpg" alt="">
                 <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
                     style="background: rgba(0, 0, 0, .2);">
                     <div class="container">
@@ -214,7 +214,7 @@
                         Chân thành cảm ơn thầy cô rất nhiều, em đã tích lũy được nhiều kinh nghiệm đáng giá và
                         nâng cao chất lượng</p>
                     <div class="d-flex align-items-center bg-white me-n5" style="border-radius: 50px 0 0 50px;">
-                        <img class="img-fluid flex-shrink-0 rounded-circle" src="./img/comment1.jpeg"
+                        <img class="img-fluid flex-shrink-0 rounded-circle" src="https://res.cloudinary.com/dzrc27udp/image/upload/v1705322453/image/comment3_k0ptdz.jpg"
                             style="width: 90px; height: 90px;">
                         <div class="ps-3">
                             <h3 class="mb-1">Hoàng Tiến Nam</h3>
@@ -228,7 +228,7 @@
                         Những bài giảng, tài liệu phong phú từ Giải pháp PEN đã giúp ích rất nhiều cho em để đạt được kết
                         quả ngày hôm nay</p>
                     <div class="d-flex align-items-center bg-white me-n5" style="border-radius: 50px 0 0 50px;">
-                        <img class="img-fluid flex-shrink-0 rounded-circle" src="./img/comment2.jpeg"
+                        <img class="img-fluid flex-shrink-0 rounded-circle" src="https://res.cloudinary.com/dzrc27udp/image/upload/v1705322445/image/comment1_nusdcs.jpg"
                             style="width: 90px; height: 90px;">
                         <div class="ps-3">
                             <h3 class="mb-1">Nguyễn Đình Bảo</h3>
@@ -242,7 +242,7 @@
                         Em muốn gửi lời cảm ơn đến thầy Vũ Khắc Ngọc ạ. Nhờ kiến thức của thầy truyền đạt mà em có thể nắm
                         vững</p>
                     <div class="d-flex align-items-center bg-white me-n5" style="border-radius: 50px 0 0 50px;">
-                        <img class="img-fluid flex-shrink-0 rounded-circle" src="./img/comment3.jpg"
+                        <img class="img-fluid flex-shrink-0 rounded-circle" src="https://res.cloudinary.com/dzrc27udp/image/upload/v1705322448/image/comment2_w4gezb.jpg"
                             style="width: 90px; height: 90px;">
                         <div class="ps-3">
                             <h3 class="mb-1">Phạm Hoàng Long</h3>

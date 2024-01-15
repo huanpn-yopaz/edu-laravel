@@ -1,7 +1,5 @@
 @section('title')
-@foreach ($post->take(1) as $value)
-{{$value->zoom->name_zoom}}
-@endforeach
+{{$name_zoom}}
 @endsection
 @extends('app')
 @section('content')
@@ -13,9 +11,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a class="" href="{{url('/')}}">Trang chủ</a></li>
                     <li class="breadcrumb-item text-white active" aria-current="page">
-                        @foreach ($post->take(1) as $value)
-                        {{$value->zoom->name_zoom}}
-                        @endforeach</li>
+                        {{$name_zoom}}
                 </ol>
             </nav>
         </div>
@@ -33,13 +29,13 @@
                     <a href="{{route('show.post',[$value->id_post, Str::slug($value->name_post)])}}" class="text-decoration-none">
                         <div class="classes-item text-black">
                             <div class="bg-light rounded-circle w-75 mx-auto p-3">
-                                <img class="img-fluid rounded-circle" src="{{asset('image/'.$value->img_post)}}" alt="">
+                                <img class="img-fluid rounded-circle" src="{{$value->img_post}}" alt="">
                             </div>
                             <div class="bg-light rounded p-4">
                                 <p class="d-block text-center h3 mb-4">{{$value->name_post}}</p>
                                 <div class="d-flex align-items-center justify-content-between mb-4">
                                     <div class="d-flex align-items-center">
-                                        <img class="rounded-circle flex-shrink-0" src="{{asset('image/'.$value->img_teacher)}}" alt=""
+                                        <img class="rounded-circle flex-shrink-0" src="{{$value->img_teacher}}" alt=""
                                             style="width: 45px; height: 45px;">
                                         <div class="ms-3">
                                             <h6 class="text-primary mb-1">{{$value->name_teacher}}</h6>

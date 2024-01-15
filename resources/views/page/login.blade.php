@@ -7,7 +7,7 @@
         <div class="container py-3">
             <div class="row d-flex align-items-center justify-content-center">
                 <div class="col-md-8 col-lg-7 col-xl-6">
-                    <img src="img/login.svg" class="img-fluid" alt="Phone image">
+                    <img src="https://res.cloudinary.com/dzrc27udp/image/upload/v1705322456/image/login_gajpnw.svg" class="img-fluid" alt="Phone image">
                 </div>
                 <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
                   <h2 class="text-center mt-2">Đăng nhập</h2>

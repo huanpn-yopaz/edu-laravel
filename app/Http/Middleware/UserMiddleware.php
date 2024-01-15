@@ -19,8 +19,6 @@ class UserMiddleware
         if (Auth::check()) {
             return $next($request);
         } else {
-            toastr()->warning('Đăng nhập để làm bài tập');
-
             return redirect('dang-nhap');
         }
     }

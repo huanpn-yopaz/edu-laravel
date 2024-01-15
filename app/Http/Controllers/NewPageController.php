@@ -2,17 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Models\News;
+use App\Repositories\BaseRepositoryInterface;
 use Illuminate\Http\Request;
 
-class DetailPostController extends Controller
+class NewPageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    protected $newRepository;
+
+    public function __construct(BaseRepositoryInterface $newRepository)
+    {
+        $this->newRepository = $newRepository;
+    }
+
     public function index()
     {
-        //
+        $news = $this->newRepository->all();
+
+        return view('page.news', compact('news'));
     }
 
     /**
@@ -26,22 +33,27 @@ class DetailPostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $slug)
     {
-        $post = Post::with('zoom:id_zoom,name_zoom', 'objects:id_object,name_object')->find($id);
-        if ($post) {
-            return view('page.detailpost')->with(compact('post'));
+        $news = $this->newRepository->show($slug);
+        if ($news) {
+            return view('page.detailnews', compact('news'));
         } else {
             abort(404);
         }
+
+    }
+
+    public function search(Request $request)
+    {
+        $keyword = $request->keyword;
+        $news = News::where('name', 'like', '%'.$keyword.'%')->get();
+
+        return view('page.searchnews', compact('news', 'keyword'));
     }
 
     /**

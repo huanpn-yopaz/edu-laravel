@@ -43,16 +43,11 @@ class AuthController extends Controller
             'email.required' => 'Không được bỏ trống',
             'email.email' => 'Sai định dạng Email',
         ]);
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], true)) {
             if (Auth::check() && Auth::user()->role == '1') {
-                toastr()->success('Đăng nhập quản trị viên');
-
                 return redirect('dashboard');
             } elseif (Auth::check()) {
-                $cookie = cookie('user', Auth::user()->name, 10080);
-                toastr()->success('Đăng nhập thành công');
-
-                return redirect('/')->withCookie($cookie);
+                return redirect('/');
             }
         } else {
             toastr()->error('Sai email hoặc mật khẩu');
@@ -80,7 +75,7 @@ class AuthController extends Controller
         User::create($user);
         toastr()->success('Đăng kí thành công');
 
-        return back();
+        return redirect('dang-nhap');
     }
 
     /**
@@ -92,7 +87,6 @@ class AuthController extends Controller
             Cookie::queue(Cookie::forget('user'));
         }
         Auth::logout();
-        toastr()->success('Đăng xuất thành công');
 
         return redirect('/');
     }
